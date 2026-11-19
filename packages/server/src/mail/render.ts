@@ -108,7 +108,8 @@ export async function renderEmailPreviewMode(
     env: Environment,
     settings: RuntimeSettings,
 ): Promise<EmailDetailParams> {
-    return renderEmailDetail(sendableText(mail).substring(0, 4096), mail.id);
+    const footer = `\n\n-----------\nFrom\t:\t${mail.sender}\nTo\t\t:\t${mail.recipient}`;
+    return renderEmailDetail(sendableText(mail).substring(0, 4096 - footer.length) + footer, mail.id);
 }
 /* oxlint-enable no-unused-vars */
 
